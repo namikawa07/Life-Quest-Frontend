@@ -1,0 +1,32 @@
+.loginInput{
+  margin: 16px 0px;
+}
+
+.activeButton{
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0.03em;
+  display: inline-block;
+  background: var(--orange-g-2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.blank {
+  height: 80px;
+}
+
+.resetPassword {
+  font-size: 12px;
+  color: var(--gray-3);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  &__text {
+    text-decoration:underline;
+    cursor: pointer;
+  }
+}

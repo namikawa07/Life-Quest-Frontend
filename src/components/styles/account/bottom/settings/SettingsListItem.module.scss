@@ -1,0 +1,12 @@
+.settingsListItem{
+  &__title{
+    width: 80px;
+    display: flex;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    justify-content: center;
+    margin-top: 7px;
+    text-align: center;
+  }
+}

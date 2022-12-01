@@ -1,0 +1,11 @@
+.buttonList{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  @media (min-width: 992px) {
+    justify-content: center;
+    margin: 12px 0px;
+  }
+}
+
+

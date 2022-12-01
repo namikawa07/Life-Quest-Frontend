@@ -1,0 +1,13 @@
+.profileBar {
+  background-color: var(--gray);
+  height: 43px;
+  width: 100%;
+  border: 1px solid var(--gray-2);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14px;
+}

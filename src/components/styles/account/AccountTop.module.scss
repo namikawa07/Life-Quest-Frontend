@@ -1,0 +1,21 @@
+.top {
+  &__icon{
+    position: relative;
+    &__wrapper{
+      width: 90px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--white);
+      position: absolute;
+      top: -25px;
+      left: 10px;
+      border-radius: 50%;
+      &__inner{
+        width: 82px;
+        height: 82px;
+      }
+    }
+  }
+}

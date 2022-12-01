@@ -1,0 +1,32 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Hiragino Sans, 'ヒラギノ角ゴシック', Hiragino Kaku Gothic ProN,
+    'ヒラギノ角ゴ ProN W3', Roboto, 'Droid Sans', YuGothic, '游ゴシック', Meiryo,
+    'メイリオ', Verdana, 'ＭＳ Ｐゴシック', sans-serif !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --white: #ffffff;
+  --gray: #cdcdcd;
+  --gray-2: #a9a9a9;
+  --gray-3: #6c6b6b;
+  --orange: #e9a501;
+  --orange-g: linear-gradient(180deg, #FFE7AC 0%, #E2907D 100%);
+  --orange-g-2: linear-gradient(90deg, #E9A501 0%, #F08079 100%);
+  --red: #FA5555;
+
+  // 変更することはないのでimportant使っている
+  --toastify-color-success: var(--orange-g-2) !important;
+}
+// ---------- end colors ----------

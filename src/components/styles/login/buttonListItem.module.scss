@@ -1,0 +1,31 @@
+.loginButton{
+  height: 60px;
+  width: 60px;
+  background: var(--white);
+  border-radius: 15px;
+  margin: 6px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  @media (min-width: 992px) {
+    margin: 0px 12px;
+  }
+  &__loginText{
+    @media (min-width: 992px) {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 18px;
+      letter-spacing: 0.03em;
+      display: inline-block;
+      background: var(--orange-g-2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  &__loginServiceIcon{
+    width: 24px;
+    height: 24px;
+  }
+}

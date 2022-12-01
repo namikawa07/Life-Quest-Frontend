@@ -1,0 +1,9 @@
+.toast{
+  background-color: var(--orange);
+  &__body{
+    color: var(--white);
+  }
+  svg {
+    color: var(--white);
+  }
+}

@@ -1,0 +1,15 @@
+.wrapper {
+  position: fixed;
+  bottom: 0;
+  padding: 0px 10px 10px;
+  width: 100%;
+  &__inner {
+   border: 1px solid var(--gray);
+   border-radius: 30px;
+   background: var(--white);
+  }
+}
+
+.centerButton {
+  width: 100px;
+}
