@@ -107,7 +107,7 @@ function LoginInner(props: any) {
   } = props
 
   const LoginServiceHandler = (serviceType: string) => {
-    console.log(`**********serviceType ${serviceType}`)
+    console.log(`============= serviceType ${serviceType}`)
     switch (serviceType) {
       case 'Apple':
         LoginByApple()
