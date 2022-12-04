@@ -12,7 +12,9 @@ const client = _axios.create({
 
 client.interceptors.request.use(async (request) => {
   const idToken = await auth.currentUser?.getIdToken()
-  request.headers.Authorization = idToken
+  if (idToken) request.headers.Authorization = `Bearer ${idToken}`
+
+  console.log(`*******request.headers ${JSON.stringify(request.headers)}`)
   return request
 })
 

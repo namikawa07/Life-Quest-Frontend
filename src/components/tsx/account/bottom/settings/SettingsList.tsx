@@ -23,12 +23,12 @@ function AccountBottomSettingsList(props: any) {
       label: '利用規約',
     },
     {
-      index: 0,
+      index: 1,
       icon: <PrivacyTipIcon sx={iconStyle} />,
       label: 'プライバシーポリシー',
     },
     {
-      index: 0,
+      index: 2,
       icon: <BlockIcon sx={iconStyle} />,
       label: 'ブロック',
     },

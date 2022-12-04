@@ -160,10 +160,15 @@ function LoginInner(props: any) {
         const userCredential: any =
           GoogleAuthProvider.credentialFromResult(result)
 
+        // FIXME: firebaseの情報をそのままapiで送ってるけど大丈夫なのか？
         const firebaseAuthParams = {
           access_token: userCredential.accessToken,
           refresh_token: result.user.refreshToken,
           tenant_id: result.user.tenantId,
+          provider: 'google',
+          user_id: result.user.uid,
+          email: result.user.email,
+          email_verified: result.user.emailVerified,
         }
 
         closeHandler()
