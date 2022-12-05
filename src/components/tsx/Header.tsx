@@ -57,7 +57,7 @@ function Header() {
       <header>
         <div onClick={() => pushRouter()}>
           <a>
-            <span className={styles.title}>タイトル</span>
+            <span className={styles.title}>Life Quest</span>
           </a>
         </div>
         <LoginDialog
