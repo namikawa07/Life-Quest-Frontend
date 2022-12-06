@@ -91,4 +91,10 @@ export interface AccountDescriptionComponentType {
   description: string
 }
 
+import { AnimationNames, TextureNames } from './animationParams'
+
+export type AnimationName = typeof AnimationNames[number]
+
+export type TextureName = typeof TextureNames[number]
+
 export default TypeScript

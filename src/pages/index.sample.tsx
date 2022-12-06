@@ -12,7 +12,6 @@ import Type from '../types'
 import Test from '../components/counter'
 
 import TodoList from '../components/todoList'
-import DrawCanvas from '../components/tsx/background/drawCanvas'
 
 const Home: NextPage = () => {
   // const useMedia = Media();
@@ -124,9 +123,6 @@ const Home: NextPage = () => {
             <button onClick={() => handledeleteHello(helloData.id || 0)}>
               Delete
             </button>
-          </div>
-          <div className={styles.home__background}>
-            <DrawCanvas />
           </div>
         </main>
       </div>
