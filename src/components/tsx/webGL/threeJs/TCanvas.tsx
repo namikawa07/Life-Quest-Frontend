@@ -17,7 +17,7 @@ export const TCanvas: VFC<Props> = (props) => {
     fov = 50,
     position = [0, 3, 10],
     width = '100vw',
-    height = '100vh',
+    height = `calc(100vh - 48px)`,
   } = props
   return (
     <div style={{ width: width, height: height }}>

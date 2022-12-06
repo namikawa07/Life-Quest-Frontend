@@ -13,7 +13,7 @@ export const YBot: VFC = () => {
     <div className={styles.container}>
       <TCanvas position={[-5, 5, -10]}>
         {/* control */}
-        <OrbitControls />
+        {/* <OrbitControls /> */}
         {/* light */}
         <TDirectionalLight position={[5, 5, 5]} />
         {/* model */}
