@@ -10,7 +10,6 @@ import { getHello, deleteHello, updateHello } from '../lib/api/hellos'
 import Type from '../types'
 
 import Test from '../components/counter'
-
 import TodoList from '../components/todoList'
 
 const Home: NextPage = () => {
