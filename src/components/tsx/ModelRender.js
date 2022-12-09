@@ -38,29 +38,19 @@ export default function ModelRender() {
     // VRMの読み込み
     const loader = new GLTFLoader()
     loader.load(
-      '/assets/model/model.vrm',
+      '/alicia.vrm',
       (gltf) => {
         VRM.from(gltf).then((vrm) => {
           // 姿勢の指定
           vrm.scene.position.y = -1
           vrm.scene.position.z = -3
-          vrm.scene.rotation.y = -Math.PI / 2
+          vrm.scene.rotation.y = Math.PI
 
           // シーンへの追加
-          // scene.add(vrm.scene)
+          scene.add(vrm.scene)
 
-          const loader = new BVHLoader()
-          //01_01, 85_02
-          loader.load('/assets/animations/77_02.bvh', function (bvh) {
-            // AnimationClipの生成
-            const clip = createClip(vrm, bvh)
-
-            // AnimationMixerの生成
-            mixer = new THREE.AnimationMixer(vrm.scene)
-            mixer.clipAction(clip).setEffectiveWeight(1.0).play()
-            // シーンに追加するタイミングが難しい
-            scene.add(vrm.scene)
-          })
+          // animationの設定
+          setupAnimation(vrm)
         })
       },
       (xhr) => {
@@ -73,6 +63,86 @@ export default function ModelRender() {
         console.log(error)
       }
     )
+
+    const setupAnimation = (vrm) => {
+      // ボーンリストの生成
+      const bones = http2str('/bone.txt')
+        .split('\n')
+        .map((boneName) => {
+          return vrm.humanoid.getBoneNode(boneName)
+        })
+
+      // AnimationClipの生成
+      const clip = THREE.AnimationClip.parseAnimation(
+        {
+          hierarchy: csv2hierarchy(http2str('/anim.csv'), 200),
+        },
+        bones
+      )
+
+      // トラック名の変更
+      clip.tracks.some((track) => {
+        track.name = track.name.replace(
+          /^\.bones\[([^\]]+)\].(position|quaternion|scale)$/,
+          '$1.$2'
+        )
+      })
+
+      // AnimationMixerの生成と再生
+      mixer = new THREE.AnimationMixer(vrm.scene)
+
+      // AnimationActionの生成とアニメーションの再生
+      const action = mixer.clipAction(clip)
+      action.play()
+    }
+
+    // http → str
+    const http2str = (url) => {
+      try {
+        const request = new XMLHttpRequest()
+        request.open('GET', url, false)
+        request.send(null)
+        if (request.status == 200 || request.status == 0) {
+          return request.responseText.trim()
+        }
+      } catch (e) {
+        console.log(e)
+      }
+      return null
+    }
+
+    // CSV → hierarchy
+    const csv2hierarchy = (csv, fps) => {
+      // 文字列 → 配列
+      const lines = csv.trim().split('\n')
+      const data = []
+      for (let j = 0; j < lines.length; j++) {
+        data[j] = []
+        const strs = lines[j].split(',')
+        for (let i = 0; i < 55 * 4; i++) {
+          data[j][i] = Number(strs[i])
+        }
+      }
+
+      // 配列 → hierarchy
+      const hierarchy = []
+      for (let i = 0; i < 55; i++) {
+        const keys = []
+        for (let j = 0; j < data.length; j++) {
+          keys[j] = {
+            rot: new THREE.Quaternion(
+              -data[j][i * 4],
+              -data[j][i * 4 + 1],
+              data[j][i * 4 + 2],
+              data[j][i * 4 + 3]
+            ).toArray(),
+            time: fps * j,
+          }
+        }
+        hierarchy[i] = { keys: keys }
+      }
+      return hierarchy
+    }
 
     // アニメーションループの開始
     let lastTime = new Date().getTime()
