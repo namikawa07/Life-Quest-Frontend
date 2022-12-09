@@ -971,6 +971,94 @@
     "@nodelib/fs.scandir" "2.1.5"
     "fastq" "^1.6.0"
 
+"@pixiv/three-vrm-core@1.0.5":
+  "integrity" "sha512-pbmzkqDKKyw39IzgGcM6dCYoGr6FBn6t7VwmrsE1BtrIyNhh7UBTC2tbm/4RlWakLB+BTaBiPi5C5WrrWkMKrw=="
+  "resolved" "https://registry.npmjs.org/@pixiv/three-vrm-core/-/three-vrm-core-1.0.5.tgz"
+  "version" "1.0.5"
+  dependencies:
+    "@pixiv/types-vrm-0.0" "1.0.0"
+    "@pixiv/types-vrmc-vrm-1.0" "1.0.0"
+
+"@pixiv/three-vrm-materials-hdr-emissive-multiplier@1.0.4":
+  "integrity" "sha512-Y6SwEGbwPKaj6d0EHA0VGu6rn82T95ObhuIGKTqIm+LuGvqxvTOfOP4HwLiXcSMMu1qRvq21X/jmu83ehE0clw=="
+  "resolved" "https://registry.npmjs.org/@pixiv/three-vrm-materials-hdr-emissive-multiplier/-/three-vrm-materials-hdr-emissive-multiplier-1.0.4.tgz"
+  "version" "1.0.4"
+  dependencies:
+    "@pixiv/types-vrmc-materials-hdr-emissive-multiplier-1.0" "1.0.0"
+
+"@pixiv/three-vrm-materials-mtoon@1.0.4":
+  "integrity" "sha512-wEXeUNHKO5ZoQVDW9P/cvc/d02Ze8wfu/0ViGep26uasuQqEwcEB3pLYjtBorWV4iUcupfkdaIjZxL3ZMpGuCA=="
+  "resolved" "https://registry.npmjs.org/@pixiv/three-vrm-materials-mtoon/-/three-vrm-materials-mtoon-1.0.4.tgz"
+  "version" "1.0.4"
+  dependencies:
+    "@pixiv/types-vrm-0.0" "1.0.0"
+    "@pixiv/types-vrmc-materials-mtoon-1.0" "1.0.0"
+
+"@pixiv/three-vrm-materials-v0compat@1.0.4":
+  "integrity" "sha512-oGIkToNkfdvm3fagwcYSv/XevwV6ia4tVjvMcdLtP2yEA25yq3wkI9wG7xP15pa5Ss93ISlmZaqCBSuKblOmiw=="
+  "resolved" "https://registry.npmjs.org/@pixiv/three-vrm-materials-v0compat/-/three-vrm-materials-v0compat-1.0.4.tgz"
+  "version" "1.0.4"
+  dependencies:
+    "@pixiv/types-vrm-0.0" "1.0.0"
+    "@pixiv/types-vrmc-materials-mtoon-1.0" "1.0.0"
+
+"@pixiv/three-vrm-node-constraint@1.0.4":
+  "integrity" "sha512-QoVARZsO4Nexfkd836vol/kGNhfcv9pHy9BtAv7yqpKgSe16LCRw8EdT4G3/GkeFQKv0uWg2N27Yf+f3BQ0Rlg=="
+  "resolved" "https://registry.npmjs.org/@pixiv/three-vrm-node-constraint/-/three-vrm-node-constraint-1.0.4.tgz"
+  "version" "1.0.4"
+  dependencies:
+    "@pixiv/types-vrmc-node-constraint-1.0" "1.0.0"
+
+"@pixiv/three-vrm-springbone@1.0.4":
+  "integrity" "sha512-E5TNoCHdfthFMxV+FLRU9AId1/Bm7jrD/9jd6WhCrbhOF/J2BdrxlW1udoBI5OLH9TrM6xxf9VZRgrUUt61bBg=="
+  "resolved" "https://registry.npmjs.org/@pixiv/three-vrm-springbone/-/three-vrm-springbone-1.0.4.tgz"
+  "version" "1.0.4"
+  dependencies:
+    "@pixiv/types-vrm-0.0" "1.0.0"
+    "@pixiv/types-vrmc-springbone-1.0" "1.0.0"
+
+"@pixiv/three-vrm@^1.0.5":
+  "integrity" "sha512-jvohMEyFXAkuK14SYtiZ4O59bDVe2dFJcg0K9MjVVm6qv2811MXCSe06IYUw5/wPB+6oKc5jXTrNSa6FSZ5mhQ=="
+  "resolved" "https://registry.npmjs.org/@pixiv/three-vrm/-/three-vrm-1.0.5.tgz"
+  "version" "1.0.5"
+  dependencies:
+    "@pixiv/three-vrm-core" "1.0.5"
+    "@pixiv/three-vrm-materials-hdr-emissive-multiplier" "1.0.4"
+    "@pixiv/three-vrm-materials-mtoon" "1.0.4"
+    "@pixiv/three-vrm-materials-v0compat" "1.0.4"
+    "@pixiv/three-vrm-node-constraint" "1.0.4"
+    "@pixiv/three-vrm-springbone" "1.0.4"
+
+"@pixiv/types-vrm-0.0@1.0.0":
+  "integrity" "sha512-3jnj/lpoLuzfsAAkqyTRiazxY88RhKFsDZkPmaFgPduDbIveFpzD153StHULO115w69I9VZ5i3ipJ6j7f0BjfA=="
+  "resolved" "https://registry.npmjs.org/@pixiv/types-vrm-0.0/-/types-vrm-0.0-1.0.0.tgz"
+  "version" "1.0.0"
+
+"@pixiv/types-vrmc-materials-hdr-emissive-multiplier-1.0@1.0.0":
+  "integrity" "sha512-ussIML1MNbWIRehgQDoduy1zXTenubwDdGVekOhN0NO5ovVwVr4VVhLAvWr5gDVIwEliPGafJRqmHpWzmRTtEA=="
+  "resolved" "https://registry.npmjs.org/@pixiv/types-vrmc-materials-hdr-emissive-multiplier-1.0/-/types-vrmc-materials-hdr-emissive-multiplier-1.0-1.0.0.tgz"
+  "version" "1.0.0"
+
+"@pixiv/types-vrmc-materials-mtoon-1.0@1.0.0":
+  "integrity" "sha512-JCqPiJZh7zccZxh28AGebvmBzch1Ql2IhU5n7nertLinPaIeVaYyWjHFJnxNVpn12nhTOYAsWpcUoOKeQWITmg=="
+  "resolved" "https://registry.npmjs.org/@pixiv/types-vrmc-materials-mtoon-1.0/-/types-vrmc-materials-mtoon-1.0-1.0.0.tgz"
+  "version" "1.0.0"
+
+"@pixiv/types-vrmc-node-constraint-1.0@1.0.0":
+  "integrity" "sha512-fNKPRMk0j87p5IKiSsxFI3inM0kx1oiIX7GBnai+pPxXNGj8zgEHbHtPbhw2kTrRX+Fqs+HTn5U5oiZPnM4YQQ=="
+  "resolved" "https://registry.npmjs.org/@pixiv/types-vrmc-node-constraint-1.0/-/types-vrmc-node-constraint-1.0-1.0.0.tgz"
+  "version" "1.0.0"
+
+"@pixiv/types-vrmc-springbone-1.0@1.0.0":
+  "integrity" "sha512-0gLtp3WT2WdCeJIQAPB9baU4w+xrIOLqIr/HgyVlJNmIICZoCdqMC+hu4cJwmPbJNBZsokD5A279Gwbr0pUy4g=="
+  "resolved" "https://registry.npmjs.org/@pixiv/types-vrmc-springbone-1.0/-/types-vrmc-springbone-1.0-1.0.0.tgz"
+  "version" "1.0.0"
+
+"@pixiv/types-vrmc-vrm-1.0@1.0.0":
+  "integrity" "sha512-aYy/LyFU6ijzAXHtg+r2TfMKrsT0/amtK4wYEPZa901FZhyvNCYtmUPUA1a1VroIO9pyKC2fd6DlLwWhYenQFg=="
+  "resolved" "https://registry.npmjs.org/@pixiv/types-vrmc-vrm-1.0/-/types-vrmc-vrm-1.0-1.0.0.tgz"
+  "version" "1.0.0"
+
 "@popperjs/core@^2.11.6":
   "integrity" "sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw=="
   "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.11.6.tgz"
@@ -1233,10 +1321,10 @@
   dependencies:
     "swiper" "*"
 
-"@types/three@^0.146.0":
-  "integrity" "sha512-75AgysUrIvTCB054eQa2pDVFurfeFW8CrMQjpzjt3yHBfuuknoSvvsESd/3EhQxPrz9si3+P0wiDUVsWUlljfA=="
-  "resolved" "https://registry.npmjs.org/@types/three/-/three-0.146.0.tgz"
-  "version" "0.146.0"
+"@types/three@^0.144.0":
+  "integrity" "sha512-psvEs6q5rLN50jUYZ3D4pZMfxTbdt3A243blt0my7/NcL6chaCZpHe2csbCtx0SOD9fI/XnF3wnVUAYZGqCSYg=="
+  "resolved" "https://registry.npmjs.org/@types/three/-/three-0.144.0.tgz"
+  "version" "0.144.0"
   dependencies:
     "@types/webxr" "*"
 
@@ -3605,10 +3693,10 @@
     "potpack" "^1.0.1"
     "zstddec" "^0.0.2"
 
-"three@^0.147.0", "three@>= 0.123.0", "three@>=0.103.0", "three@>=0.122.0", "three@>=0.126", "three@>=0.133", "three@>=0.137":
-  "integrity" "sha512-LPTOslYQXFkmvceQjFTNnVVli2LaVF6C99Pv34fJypp8NbQLbTlu3KinZ0zURghS5zEehK+VQyvWuPZ/Sm8fzw=="
-  "resolved" "https://registry.npmjs.org/three/-/three-0.147.0.tgz"
-  "version" "0.147.0"
+"three@^0.144.0", "three@>= 0.123.0", "three@>=0.103.0", "three@>=0.122.0", "three@>=0.126", "three@>=0.133", "three@>=0.137":
+  "integrity" "sha512-R8AXPuqfjfRJKkYoTQcTK7A6i3AdO9++2n8ubya/GTU+fEHhYKu1ZooRSCPkx69jbnzT7dD/xEo6eROQTt2lJw=="
+  "resolved" "https://registry.npmjs.org/three/-/three-0.144.0.tgz"
+  "version" "0.144.0"
 
 "tiny-inflate@^1.0.3":
   "integrity" "sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw=="

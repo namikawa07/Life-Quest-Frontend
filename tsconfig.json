@@ -21,6 +21,6 @@
       ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/modules/useMedia.js", "src/lib/api/client.js", "src/components/tsx/Swiper.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/modules/useMedia.js", "src/lib/api/client.js", "src/components/tsx/Swiper.jsx", "src/components/tsx/VRMModeling/exportModel.js", "src/components/tsx/ThreeJsModel.tsx", "src/components/tsx/Test.js"],
   "exclude": ["node_modules"]
 }

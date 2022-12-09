@@ -11,22 +11,25 @@ import { style } from '@mui/system'
 export const YBot: VFC = () => {
   return (
     <div className={styles.container}>
-      <TCanvas position={[-5, 5, -10]}>
+      <TCanvas position={[-3, 0, -5]}>
         {/* control */}
         {/* <OrbitControls /> */}
+        <OrbitControls />
         {/* light */}
         <TDirectionalLight position={[5, 5, 5]} />
         {/* model */}
         <Suspense fallback={null}>
-          <Model />
+          <Model position={[0, -1.5, -0.9]} scale={0.11} />
         </Suspense>
         {/* objects */}
-        <TFloorPlane />
+        {/* <TFloorPlane /> */}
       </TCanvas>
 
+      {/*}
       <div className={styles.controller}>
         <Controller />
       </div>
+  */}
     </div>
   )
 }

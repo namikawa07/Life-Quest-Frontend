@@ -1,13 +1,20 @@
 import type { NextPage } from 'next'
 import MainLayout from '../layouts'
-import React from 'react'
-
-import { YBot } from '../components/tsx/webGL/character/model/YBot'
+import Image from 'next/image'
+import styles from './index.module.scss'
+// import Test from '../components/tsx/3DModel/Test'
+// import { YBot } from '../components/tsx/webGL/character/model/YBot'
+import Test from '../components/tsx/Test'
 
 const RouteIndex: NextPage = () => {
   return (
     <MainLayout>
-      <YBot />
+      {/*<YBot />*/}
+      {/*<Test />*/}
+      <Test />
+      <div className={styles.background}>
+        <Image src="/image.jpg" alt="logo" layout="fill" objectFit="cover" />
+      </div>
     </MainLayout>
   )
 }

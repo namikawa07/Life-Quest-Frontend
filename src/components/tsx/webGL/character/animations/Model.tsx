@@ -22,7 +22,7 @@ type GLTFResult = GLTF & {
   }
 }
 
-const ModelPath = '/assets/ybot.glb'
+const ModelPath = '/assets/sample.glb'
 
 export const Model: VFC<JSX.IntrinsicElements['group']> = (props) => {
   const modelSnap = useSnapshot(modelState)
@@ -33,9 +33,16 @@ export const Model: VFC<JSX.IntrinsicElements['group']> = (props) => {
   const [matcapBody] = useMatcapTexture(modelSnap.texture.body, 512)
   const [matcapJoints] = useMatcapTexture(modelSnap.texture.joint, 512)
 
+  const { position, scale } = props
+
   return (
     <group ref={groupRef} {...props} dispose={null}>
-      <group name="Armature" rotation={[Math.PI / 2, 0, 0]} scale={0.02}>
+      <group
+        name="Armature"
+        rotation={[Math.PI / 2, 0, 0]}
+        scale={scale}
+        position={position}
+      >
         <primitive object={nodes.mixamorigHips} />
         {/* Joints */}
         <skinnedMesh
