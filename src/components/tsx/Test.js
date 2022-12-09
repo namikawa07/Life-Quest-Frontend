@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { BVHLoader } from 'three/examples/jsm/loaders/BVHLoader'
-import { VRMLoaderPlugin, VRMSchema } from '@pixiv/three-vrm'
+import { VRM, VRMLoaderPlugin, VRMSchema } from '@pixiv/three-vrm'
 
-export default function CommonDialog() {
+export default function ModelRender() {
   const [isLoaded, setLoaded] = useState(false)
   const [progress, setProgress] = useState(0)
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function CommonDialog() {
     const renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setClearColor(0x7fbfff, 1.0)
+    renderer.setClearColor(0x7fbfff, 0)
     document.body.appendChild(renderer.domElement)
 
     // ライトの準備
@@ -34,52 +34,32 @@ export default function CommonDialog() {
     // アニメーションの準備
     let mixer = null
 
+    // alicia.vrmをロードしてそれをgltfとする
     // VRMの読み込み
     const loader = new GLTFLoader()
-
-    // Install GLTFLoader plugin
-    loader.register((parser) => {
-      return new VRMLoaderPlugin(parser)
-    })
-
-    // alicia.vrmをロードしてそれをgltfとする
     loader.load(
       '/assets/model/alicia.vrm',
-      async (gltf) => {
-        // ロードしたgltfをVRM.fromで読み込む
-        const vrm = await gltf.userData.vrm
-        // 姿勢の指定
-        vrm.scene.position.y = -1
-        vrm.scene.position.z = -3
-        vrm.scene.rotation.y = Math.PI
+      (gltf) => {
+        VRM.from(gltf).then((vrm) => {
+          // 姿勢の指定
+          vrm.scene.position.y = -1
+          vrm.scene.position.z = -3
+          vrm.scene.rotation.y = Math.PI
 
-        // シーンへの追加
-        scene.add(vrm.scene)
+          // シーンへの追加
+          scene.add(vrm.scene)
 
-        console.log(`********vrm ${vrm}`)
+          const loader = new BVHLoader()
+          //01_01, 85_02
+          loader.load('/assets/animations/85_02.bvh', function (bvh) {
+            // AnimationClipの生成
+            const clip = createClip(vrm, bvh)
 
-        // BVHの読み込み
-        const loader = new BVHLoader()
-        loader.load('/85_02.bvh', function (bvh) {
-          console.log(`******loaded bvh`)
-          // VRMSchemaは削除された様子
-          // https://github.com/pixiv/three-vrm/blob/d66f171cdea3bfd4f199e85afe2e45b2756f56c0/docs/migration-guide-1.0.md
-          var eye = vrm.humanoid.getBoneNode(
-            THREE.VRMSchema.HumanoidBoneName.LeftEye
-          )
-
-          console.log(`*******eye ${eye}`)
-          // AnimationClipの生成
-          const clip = createClip(vrm, bvh)
-
-          console.log(`******loaded bvh2`)
-
-          // AnimationMixerの生成
-          mixer = new THREE.AnimationMixer(vrm.scene)
-          mixer.clipAction(clip).setEffectiveWeight(1.0).play()
+            // AnimationMixerの生成
+            mixer = new THREE.AnimationMixer(vrm.scene)
+            mixer.clipAction(clip).setEffectiveWeight(1.0).play()
+          })
         })
-
-        setLoaded(true)
       },
       (xhr) => {
         setProgress((xhr.loaded / xhr.total) * 100)
@@ -170,11 +150,7 @@ export default function CommonDialog() {
 
   // クリップの生成
   function createClip(vrm, bvh) {
-    console.log(`*******vrm ${vrm}`)
-    console.log(`*******bvh ${bvh}`)
     // ボーンリストの生成
-    // VRMSchemaがundefunedになっている
-    console.log(`*******VRMSchema ${VRMSchema}`)
     const nameList = [
       VRMSchema.HumanoidBoneName.Head,
       VRMSchema.HumanoidBoneName.Neck,

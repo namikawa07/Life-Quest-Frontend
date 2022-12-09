@@ -15,12 +15,12 @@
     "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.5",
-    "@pixiv/three-vrm": "^1.0.5",
+    "@pixiv/three-vrm": "^0.6.11",
     "@react-three/drei": "^9.46.2",
     "@react-three/fiber": "^8.9.1",
     "@reduxjs/toolkit": "^1.8.5",
     "@types/swiper": "^6.0.0",
-    "@types/three": "^0.144.0",
+    "@types/three": "^0.137.0",
     "axios": "^0.27.2",
     "dotenv": "^16.0.3",
     "eslint-config-prettier": "^8.5.0",
@@ -33,7 +33,7 @@
     "react-router-dom": "^6.4.0",
     "react-toastify": "^9.0.8",
     "swiper": "^8.4.2",
-    "three": "^0.144.0",
+    "three": "^0.137.0",
     "valtio": "^1.7.6"
   },
   "devDependencies": {
