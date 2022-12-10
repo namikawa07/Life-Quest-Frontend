@@ -57,7 +57,9 @@ function Header() {
       <header>
         <div onClick={() => pushRouter()}>
           <a>
-            <span className={styles.title}>タイトル</span>
+            <span className={styles.title}>
+              {process.env.NEXT_PUBLIC_SERVICE_NAME}
+            </span>
           </a>
         </div>
         <LoginDialog
