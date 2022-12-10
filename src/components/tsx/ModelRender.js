@@ -57,8 +57,6 @@ export default function ModelRender() {
 
           // animationの設定
           setupAnimation(vrm)
-
-          console.log(`*******vrmData  ${vrmData}`)
         })
       },
       (xhr) => {
