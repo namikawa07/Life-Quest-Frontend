@@ -22,6 +22,9 @@ export default function ModelRender(props: any) {
   // シーンの準備
   const scene = new THREE.Scene()
 
+  // アニメーションの準備
+  let mixer: any = null
+
   useEffect(() => {
     const canvas: any = document.querySelector('#canvas')
     const camera = settingCamera()
@@ -56,9 +59,6 @@ export default function ModelRender(props: any) {
   }
 
   function init(camera: any, renderer: any) {
-    // アニメーションの準備
-    let mixer: any = null
-
     // vrmをロードしてそれをgltfとする
     // VRMの読み込み
 
@@ -77,7 +77,7 @@ export default function ModelRender(props: any) {
           scene.add(vrm.scene)
 
           // animationの設定
-          setupAnimation(vrm)
+          setAnimation(vrm)
           console.log(`******vrmData ${vrmData}`)
         })
       },
@@ -92,6 +92,24 @@ export default function ModelRender(props: any) {
       }
     )
 
+    // アニメーションループの開始
+    let lastTime = new Date().getTime()
+    function animate() {
+      console.log(`******animate`)
+      requestAnimationFrame(animate)
+
+      // AnimationMixerの更新
+      const time = new Date().getTime()
+      if (mixer) mixer.update(time - lastTime)
+      lastTime = time
+
+      render(renderer, scene, camera)
+    }
+    animate()
+    console.log(`******vrmData ${vrmData}`)
+  }
+
+  const setAnimation = (vrm: any) => {
     const setupAnimation = (vrm: any) => {
       // ボーンリストの生成
       const bonesArray = http2str('/models/bone.txt').split('\n')
@@ -179,24 +197,10 @@ export default function ModelRender(props: any) {
       return hierarchy
     }
 
-    // アニメーションループの開始
-    let lastTime = new Date().getTime()
-    function animate() {
-      console.log(`******animate`)
-      requestAnimationFrame(animate)
-
-      // AnimationMixerの更新
-      const time = new Date().getTime()
-      if (mixer) mixer.update(time - lastTime)
-      lastTime = time
-
-      render(renderer, scene, camera)
-    }
-    animate()
-    console.log(`******vrmData ${vrmData}`)
+    setupAnimation(vrm)
   }
 
-  function render(renderer: any, scene: any, camera: any) {
+  const render = (renderer: any, scene: any, camera: any) => {
     renderer.render(scene, camera)
   }
 
