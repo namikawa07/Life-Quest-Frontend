@@ -23,8 +23,11 @@ export default function ModelRender(props: any) {
   const scene = new THREE.Scene()
 
   useEffect(() => {
+    const canvas: any = document.querySelector('#canvas')
     const camera = settingCamera()
-    init(camera)
+    const renderer = settingRenderer(canvas)
+    settingLight()
+    init(camera, renderer)
   }, [])
 
   function settingCamera() {
@@ -36,19 +39,23 @@ export default function ModelRender(props: any) {
     )
   }
 
-  function init(camera: any) {
-    // レンダラーの準備
-    const canvas: any = document.querySelector('#canvas')
+  function settingRenderer(canvas: any) {
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
+    // レンダラーの準備
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setClearColor(0x7fbfff, 0)
 
-    // ライトの準備
+    return renderer
+  }
+
+  function settingLight() {
     const light = new THREE.DirectionalLight(0xffffff)
     light.position.set(-1, 1, -1).normalize()
     scene.add(light)
+  }
 
+  function init(camera: any, renderer: any) {
     // アニメーションの準備
     let mixer: any = null
 
