@@ -7,6 +7,7 @@ import counterReducer from './slices/counterSlice'
 import dialogReducer from './slices/dialogSlice'
 import todosReducer from './slices/todosSlice'
 import profileReducer from './slices/profileSlice'
+import animationReducer from './slices/animationSlice'
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     todos: todosReducer,
     dialog: dialogReducer,
     profile: profileReducer,
+    animation: animationReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -3,9 +3,27 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { VRM } from '@pixiv/three-vrm'
 import styles from './ModelRender.module.scss'
+import { useSelector } from '~/store'
+import { useDispatch } from 'react-redux'
+import { setMainCharacter } from '~/slices/animationSlice'
+
+interface ModelRenderType {
+  props: PropsType
+  canvas: HTMLCanvasElement | null
+}
+
+interface PropsType {
+  currentAction: string | null
+  characterName: string
+  boneSize: number
+}
 
 // TODO: typescriptのany直す
-export default function ModelRender(props: any) {
+// TODO: stateを使ってglobalな状態管理をする
+export default function ModelRender(props: ModelRenderType['props']) {
+  const mainCharacter = useSelector((state) => state.animation.mainCharacter)
+  const dispatch = useDispatch()
+
   // -------- state -------
   const [isLoaded, setLoaded] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -30,7 +48,7 @@ export default function ModelRender(props: any) {
   // -------- globalData -------
 
   useEffect(() => {
-    const canvas: any = document.querySelector('#canvas')
+    const canvas: ModelRenderType['canvas'] = document.querySelector('#canvas')
     const camera = settingCamera()
     const renderer = settingRenderer(canvas)
     settingLight()
@@ -48,7 +66,10 @@ export default function ModelRender(props: any) {
   }
 
   function settingRenderer(canvas: any) {
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+    })
     // レンダラーの準備
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(window.innerWidth, window.innerHeight)
@@ -67,19 +88,22 @@ export default function ModelRender(props: any) {
     await vrmLoader.load(
       characterPath,
       async (gltf) => {
+        // 型が膨大なのでanyで対応している
         const vrm: any = await VRM.from(gltf)
         // 姿勢の指定
         vrm.scene.position.y = -1
         vrm.scene.position.z = -3
         vrm.scene.rotation.y = Math.PI
 
+        await dispatch(setMainCharacter(vrm))
         setVrm(vrm)
 
         // シーンへの追加
         scene.add(vrm.scene)
-        console.log(`*******vrm ${vrm}`)
 
         setAnimation(vrm)
+
+        console.log(`*********mainCharacter ${mainCharacter}`)
       },
       (xhr) => {
         setProgress((xhr.loaded / xhr.total) * 100)
