@@ -3,7 +3,6 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { VRM } from '@pixiv/three-vrm'
 import styles from './ModelRender.module.scss'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 // TODO: typescriptのany直す
 export default function ModelRender(props: any) {
@@ -14,7 +13,7 @@ export default function ModelRender(props: any) {
   // -------- state -------
 
   // -------- props -------
-  const { characterName, boneSize } = props
+  const { currentAction, characterName, boneSize } = props
   // -------- props -------
 
   // -------- globalData -------
@@ -26,6 +25,8 @@ export default function ModelRender(props: any) {
   let mixer: any = null
   // アニメーションループの準備
   let lastTime = new Date().getTime()
+
+  const vrmLoader = new GLTFLoader()
   // -------- globalData -------
 
   useEffect(() => {
@@ -62,26 +63,23 @@ export default function ModelRender(props: any) {
     scene.add(light)
   }
 
-  function loadModel() {
-    // vrmをロードしてそれをgltfとする
-    // VRMの読み込み
-    const vrmLoader = new GLTFLoader()
-    vrmLoader.load(
+  const loadModel = async () => {
+    await vrmLoader.load(
       characterPath,
-      (gltf) => {
-        VRM.from(gltf).then((vrm: any) => {
-          // 姿勢の指定
-          vrm.scene.position.y = -1
-          vrm.scene.position.z = -3
-          vrm.scene.rotation.y = Math.PI
-          setVrm(vrm)
+      async (gltf) => {
+        const vrm: any = await VRM.from(gltf)
+        // 姿勢の指定
+        vrm.scene.position.y = -1
+        vrm.scene.position.z = -3
+        vrm.scene.rotation.y = Math.PI
 
-          // シーンへの追加
-          scene.add(vrm.scene)
+        setVrm(vrm)
 
-          // animationの設定
-          setAnimation(vrm)
-        })
+        // シーンへの追加
+        scene.add(vrm.scene)
+        console.log(`*******vrm ${vrm}`)
+
+        setAnimation(vrm)
       },
       (xhr) => {
         setProgress((xhr.loaded / xhr.total) * 100)
@@ -102,7 +100,9 @@ export default function ModelRender(props: any) {
 
       // AnimationMixerの更新
       const time = new Date().getTime()
+      // console.log(`**********1`)
       if (mixer) mixer.update(time - lastTime)
+      // console.log(`**********2`)
       lastTime = time
 
       render(renderer, scene, camera)
@@ -111,7 +111,7 @@ export default function ModelRender(props: any) {
   }
 
   const setAnimation = (vrm: any) => {
-    const setupAnimation = (vrm: any) => {
+    const setupAnimation = () => {
       // ボーンリストの生成
       const bonesArray = http2str('/models/bone.txt').split('\n')
       const bones: any = []
@@ -143,11 +143,16 @@ export default function ModelRender(props: any) {
       })
 
       // AnimationMixerの生成と再生
+      // animation関数で常にアニメーションのためのフレームは再生し続けている
+      // アニメーションのデータがここで入りaction.playするとアニメーションが目に見える形で再生される
+      console.log(`**********3`)
       mixer = new THREE.AnimationMixer(vrm.scene)
-
+      console.log(`**********4`)
       // AnimationActionの生成とアニメーションの再生
       const action = mixer.clipAction(clip)
+      console.log(`**********5`)
       action.play()
+      console.log(`**********6`)
     }
 
     // http → str
@@ -198,7 +203,7 @@ export default function ModelRender(props: any) {
       return hierarchy
     }
 
-    setupAnimation(vrm)
+    setupAnimation()
   }
 
   const render = (renderer: any, scene: any, camera: any) => {

@@ -20,7 +20,7 @@ const RouteIndex: NextPage = () => {
       </main>
       <div className={styles.render}>
         <ModelRender
-          animation={currentAction}
+          currentAction={currentAction}
           characterName={'girl_1'}
           boneSize={53}
         />
