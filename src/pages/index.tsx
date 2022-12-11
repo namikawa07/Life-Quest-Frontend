@@ -19,7 +19,7 @@ const RouteIndex: NextPage = () => {
         <button onClick={() => clickAction('jump')}>Jump</button>
       </main>
       <div className={styles.render}>
-        <ModelRender />
+        <ModelRender animation={currentAction} />
       </div>
       <div className={styles.background}>
         <Image src="/image.jpg" alt="logo" layout="fill" objectFit="cover" />

@@ -3,13 +3,15 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { VRM } from '@pixiv/three-vrm'
 import styles from './ModelRender.module.scss'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 // TODO: typescriptのany直す
-export default function ModelRender() {
+export default function ModelRender(props: any) {
   const [isLoaded, setLoaded] = useState(false)
   const [progress, setProgress] = useState(0)
   const [vrmData, setVrm] = useState(null)
-  const [animation, setAnimation] = useState(null)
+
+  const { animation } = props
   useEffect(() => {
     const boneSize = 53
     const characterPath = `/models/boneSize/${boneSize}/characters/girl_1.vrm`
@@ -41,7 +43,7 @@ export default function ModelRender() {
     // アニメーションの準備
     let mixer: any = null
 
-    // alicia.vrmをロードしてそれをgltfとする
+    // vrmをロードしてそれをgltfとする
     // VRMの読み込み
     const loader = new GLTFLoader()
     loader.load(
@@ -170,10 +172,14 @@ export default function ModelRender() {
       if (mixer) mixer.update(time - lastTime)
       lastTime = time
 
-      renderer.render(scene, camera)
+      render(renderer, scene, camera)
     }
     animate()
   }, [])
+
+  function render(renderer: any, scene: any, camera: any) {
+    renderer.render(scene, camera)
+  }
 
   return (
     <>
