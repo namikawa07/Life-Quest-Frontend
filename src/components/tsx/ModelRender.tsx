@@ -7,19 +7,25 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 // TODO: typescriptのany直す
 export default function ModelRender(props: any) {
+  // state
   const [isLoaded, setLoaded] = useState(false)
   const [progress, setProgress] = useState(0)
   const [vrmData, setVrm] = useState(null)
 
-  const { animation } = props
-  useEffect(() => {
-    const boneSize = 53
-    const characterPath = `/models/boneSize/${boneSize}/characters/girl_1.vrm`
-    const animatioinPath = `/models/boneSize/${boneSize}/animations/jump.csv`
+  // props
+  const { animation, characterName, boneSize } = props
 
+  // globalData
+  const characterPath = `/models/boneSize/${boneSize}/characters/${characterName}.vrm`
+  const animatioinPath = `/models/boneSize/${boneSize}/animations/jump.csv`
+
+  useEffect(() => {
+    init()
+  }, [])
+
+  function init() {
     // シーンの準備
     const scene = new THREE.Scene()
-
     // カメラの準備
     const camera = new THREE.PerspectiveCamera(
       45,
@@ -45,8 +51,9 @@ export default function ModelRender(props: any) {
 
     // vrmをロードしてそれをgltfとする
     // VRMの読み込み
-    const loader = new GLTFLoader()
-    loader.load(
+
+    const vrmLoader = new GLTFLoader()
+    vrmLoader.load(
       characterPath,
       (gltf) => {
         VRM.from(gltf).then((vrm: any) => {
@@ -61,6 +68,7 @@ export default function ModelRender(props: any) {
 
           // animationの設定
           setupAnimation(vrm)
+          console.log(`******vrmData ${vrmData}`)
         })
       },
       (xhr) => {
@@ -76,7 +84,6 @@ export default function ModelRender(props: any) {
 
     const setupAnimation = (vrm: any) => {
       // ボーンリストの生成
-
       const bonesArray = http2str('/models/bone.txt').split('\n')
       const bones: any = []
       bonesArray.forEach((boneName: any) => {
@@ -165,6 +172,7 @@ export default function ModelRender(props: any) {
     // アニメーションループの開始
     let lastTime = new Date().getTime()
     function animate() {
+      console.log(`******animate`)
       requestAnimationFrame(animate)
 
       // AnimationMixerの更新
@@ -175,7 +183,8 @@ export default function ModelRender(props: any) {
       render(renderer, scene, camera)
     }
     animate()
-  }, [])
+    console.log(`******vrmData ${vrmData}`)
+  }
 
   function render(renderer: any, scene: any, camera: any) {
     renderer.render(scene, camera)
