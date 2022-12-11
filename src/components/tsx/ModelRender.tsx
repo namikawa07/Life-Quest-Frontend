@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { VRM } from '@pixiv/three-vrm'
+import styles from './ModelRender.module.scss'
 
+// TODO: typescriptのany直す
 export default function ModelRender() {
   const [isLoaded, setLoaded] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -25,11 +27,11 @@ export default function ModelRender() {
     )
 
     // レンダラーの準備
-    const renderer = new THREE.WebGLRenderer({ antialias: true })
+    const canvas: any = document.querySelector('#canvas')
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setClearColor(0x7fbfff, 0)
-    document.body.appendChild(renderer.domElement)
 
     // ライトの準備
     const light = new THREE.DirectionalLight(0xffffff)
@@ -37,7 +39,7 @@ export default function ModelRender() {
     scene.add(light)
 
     // アニメーションの準備
-    let mixer = null
+    let mixer: any = null
 
     // alicia.vrmをロードしてそれをgltfとする
     // VRMの読み込み
@@ -45,7 +47,7 @@ export default function ModelRender() {
     loader.load(
       characterPath,
       (gltf) => {
-        VRM.from(gltf).then((vrm) => {
+        VRM.from(gltf).then((vrm: any) => {
           // 姿勢の指定
           vrm.scene.position.y = -1
           vrm.scene.position.z = -3
@@ -70,12 +72,12 @@ export default function ModelRender() {
       }
     )
 
-    const setupAnimation = (vrm) => {
+    const setupAnimation = (vrm: any) => {
       // ボーンリストの生成
 
       const bonesArray = http2str('/models/bone.txt').split('\n')
-      const bones = []
-      bonesArray.forEach((boneName) => {
+      const bones: any = []
+      bonesArray.forEach((boneName: any) => {
         if (vrm.humanoid.getBoneNode(boneName) !== null)
           bones.push(vrm.humanoid.getBoneNode(boneName))
       })
@@ -111,7 +113,7 @@ export default function ModelRender() {
     }
 
     // http → str
-    const http2str = (url) => {
+    const http2str: any = (url: any) => {
       try {
         const request = new XMLHttpRequest()
         request.open('GET', url, false)
@@ -126,10 +128,10 @@ export default function ModelRender() {
     }
 
     // CSV → hierarchy
-    const csv2hierarchy = (csv, fps) => {
+    const csv2hierarchy = (csv: any, fps: any) => {
       // 文字列 → 配列
       const lines = csv.trim().split('\n')
-      const data = []
+      const data: any = []
       for (let j = 0; j < lines.length; j++) {
         data[j] = []
         const strs = lines[j].split(',')
@@ -173,5 +175,9 @@ export default function ModelRender() {
     animate()
   }, [])
 
-  return <></>
+  return (
+    <>
+      <canvas id="canvas" className={styles.canvas}></canvas>
+    </>
+  )
 }

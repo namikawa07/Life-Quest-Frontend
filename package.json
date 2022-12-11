@@ -34,8 +34,7 @@
     "react-router-dom": "^6.4.0",
     "react-toastify": "^9.0.8",
     "swiper": "^8.4.2",
-    "three": "^0.137.0",
-    "valtio": "^1.7.6"
+    "three": "^0.137.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

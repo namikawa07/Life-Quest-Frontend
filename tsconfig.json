@@ -21,6 +21,5 @@
       ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.js","**/*.jsx", "**/*.ts", "**/*.tsx", "src"],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "**/*.js","**/*.jsx", "**/*.ts", "**/*.tsx", "src"], "src/components/tsx/ModelRender.js"
 }
