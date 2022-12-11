@@ -19,21 +19,24 @@ export default function ModelRender(props: any) {
   const characterPath = `/models/boneSize/${boneSize}/characters/${characterName}.vrm`
   const animatioinPath = `/models/boneSize/${boneSize}/animations/jump.csv`
 
+  // シーンの準備
+  const scene = new THREE.Scene()
+
   useEffect(() => {
-    init()
+    const camera = settingCamera()
+    init(camera)
   }, [])
 
-  function init() {
-    // シーンの準備
-    const scene = new THREE.Scene()
-    // カメラの準備
-    const camera = new THREE.PerspectiveCamera(
+  function settingCamera() {
+    return new THREE.PerspectiveCamera(
       45,
       window.innerWidth / window.innerHeight,
       0.1,
       1000
     )
+  }
 
+  function init(camera: any) {
     // レンダラーの準備
     const canvas: any = document.querySelector('#canvas')
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
