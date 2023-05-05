@@ -21,6 +21,5 @@
       ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/modules/useMedia.js", "src/lib/api/client.js", "src/components/tsx/Swiper.jsx"],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "**/*.js","**/*.jsx", "**/*.ts", "**/*.tsx", "src"]
 }
